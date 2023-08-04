@@ -25,7 +25,6 @@ const getEmails = async () => {
     })
   ).data.results;
 
-  if (!cookies().has("publicKey")) redirect("/");
   const { value: publicKey } = cookies().get("publicKey")!;
 
   // const emails = res.filter((email) => email.ownerAddress === publicKey);
