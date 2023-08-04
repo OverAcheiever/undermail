@@ -13,26 +13,13 @@ export const create = ({
   subject: string;
   body: string;
 }) => {
-  axios
-    .post(
-      "https://dev.underdogprotocol.com/v2/projects/1/nfts",
-      {
+    axios.post("https://dev.underdogprotocol.com/v2/projects/1/nfts", {
         name: "mail",
-        image:
-          "https://media.discordapp.net/attachments/947390920645554236/1130655144040734770/015491d333cde4a4c24d1a76239a97d4.jpg",
+        image: "",
         receiverAddress: to,
-        attributes: {
-          from,
-          subject: subject,
-          body: body,
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${env.UNDERDOG_KEY}`,
-        },
-      }
-    )
+        attributes: { from, subject: subject, body: body, }, },
+        { headers: { Authorization: `Bearer ${env.UNDERDOG_KEY}`, }, 
+    })
     .then((res) => {
       console.log(res.data);
     })

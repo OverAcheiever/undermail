@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.27.2",
+    "@editorjs/header": "^2.7.0",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^4.14.0",
     "@solana/wallet-adapter-base": "^0.9.22",
@@ -28,6 +30,7 @@
     "next": "^13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-textarea-autosize": "^8.5.2",
     "superjson": "1.12.2",
     "zod": "^3.21.4"
   },

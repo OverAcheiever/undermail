@@ -5,8 +5,11 @@ import { cookies } from "next/headers";
 
 import { PlusIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const getEmails = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   const res: {
     ownerAddress: string;
     attributes: {
@@ -22,11 +25,12 @@ const getEmails = async () => {
     })
   ).data.results;
 
+  if (!cookies().has("publicKey")) redirect("/");
   const { value: publicKey } = cookies().get("publicKey")!;
 
-  const emails = res.filter((email) => email.ownerAddress === publicKey);
+  // const emails = res.filter((email) => email.ownerAddress === publicKey);
 
-  return emails.map((email) => ({
+  return res.map((email) => ({
     from: email.attributes.from,
     subject: email.attributes.subject,
     body: email.attributes.body,

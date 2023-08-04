@@ -3,6 +3,18 @@ import React, { useState, ChangeEvent } from "react";
 import { create } from "./create";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+
+const editor = new EditorJS({
+  /**
+   * Id of Element that should contain Editor instance
+   */
+  holder: "editorjs",
+  tools: {
+    header: Header,
+  },
+});
 
 const Create = (): JSX.Element => {
   const [to, setTo] = useState<string>();
@@ -17,22 +29,26 @@ const Create = (): JSX.Element => {
     setSubject(event.target.value);
   };
 
-  const handleBodyChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setBody(event.target.value);
+  const handleBodyChange = (body: string) => {
+    setBody(body);
   };
 
   const { publicKey } = useWallet();
 
-  const send = () => {
+  const send = async () => {
     if (!to || !subject || !body) return;
 
-    create({
+    await create({
       from: publicKey!.toString(),
       to,
       subject,
       body,
     });
+
+    console.log("sent");
   };
+
+  console.log(to, subject, body);
 
   return (
     <div className="relative w-full flex-grow">
@@ -54,12 +70,12 @@ const Create = (): JSX.Element => {
           onChange={handleSubjectChange}
         />
       </div>
-      <div className="h-full w-full bg-white">
-        <input
-          className="h-full w-full bg-black p-5 outline-none"
+      <div className="h-full w-full" id="editorjs">
+        {/* <TextareaAutosize
+          className="h-full w-full border-0 bg-black p-5 outline-none"
           value={body}
-          onChange={handleBodyChange}
-        ></input>
+          onChange={(e) => handleBodyChange(e.target.value)}
+        /> */}
       </div>
 
       <div className="fixed bottom-5 left-5">
