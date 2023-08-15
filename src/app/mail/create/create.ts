@@ -2,6 +2,7 @@
 import { env } from "@/env.mjs";
 import axios from "axios";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const create = async ({
   to,
@@ -30,4 +31,6 @@ export const create = async ({
     },
     { headers: { Authorization: `Bearer ${env.UNDERDOG_KEY}` } }
   );
+
+  redirect("/mail/inbox");
 };
