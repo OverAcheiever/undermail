@@ -11,7 +11,7 @@ const Home = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (publicKey) {
-      setCookie(publicKey!.toString());
+      setCookie(publicKey.toString());
       setLoaded(true);
     }
   }, [publicKey]);
