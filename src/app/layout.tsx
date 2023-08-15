@@ -1,11 +1,11 @@
 "use client";
 import "./globals.css";
-import { Space_Mono } from "next/font/google";
+import { Space_Grotesk, Space_Mono } from "next/font/google";
 
 import { Provider } from "./components/wallet/Provider";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-const space = Space_Mono({
+const space = Space_Grotesk({
   weight: ["400", "700"],
   subsets: ["latin"],
 });

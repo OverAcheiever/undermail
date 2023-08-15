@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { JSONContent } from "@tiptap/react";
 
 const getEmails = async () => {
   await new Promise((resolve) => setTimeout(resolve, 500));
@@ -16,6 +17,7 @@ const getEmails = async () => {
       subject: string;
       body: string;
       from: string;
+      createdAt: string;
     };
   }[] = await (
     await axios.get("https://dev.underdogprotocol.com/v2/projects/1/nfts", {
@@ -27,12 +29,13 @@ const getEmails = async () => {
 
   const { value: publicKey } = cookies().get("publicKey")!;
 
-  // const emails = res.filter((email) => email.ownerAddress === publicKey);
+  const emails = res.filter((email) => email.ownerAddress === publicKey);
 
-  return res.map((email) => ({
+  return emails.map((email) => ({
     from: email.attributes.from,
     subject: email.attributes.subject,
-    body: email.attributes.body,
+    body: JSON.parse(email.attributes.body) as JSONContent,
+    createdAt: email.attributes.createdAt,
   }));
 };
 
@@ -41,17 +44,59 @@ const Inbox = async () => {
 
   return (
     <div className="relative w-full">
-      {emails.map(({ from, subject, body }, key) => (
-        <div className="flex h-16 items-center border-b-2 border-[#111] px-5">
-          <div className="text-[#444]">
-            {from.slice(0, 5) + "..." + from.slice(-5)}
-          </div>
+      {emails.map(({ from, subject, body, createdAt }, key) => {
+        const preview =
+          body && body.content && body.content.length > 0
+            ? body.content
+                .filter((node) => node.type === "paragraph" && node.content)
+                // map over every content in node
+                .map((node) => node.content?.map((node) => node.text).join(" "))
+                .join(" ")
+            : "";
 
-          <div className="pl-10">{subject}</div>
-          <div className="px-2 text-[#555]">-</div>
-          <div className="text-[#555]">{body}</div>
-        </div>
-      ))}
+        const parsedDate = new Date(createdAt);
+        const date = `${
+          parsedDate.getHours() < 24
+            ? // seconds / hours / minutes ago
+              parsedDate.getHours() < 1
+              ? `${parsedDate.getMinutes()} minutes ago`
+              : `${parsedDate.getHours()} hours ago`
+            : `${parsedDate.getDate()} ${
+                [
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December",
+                ][parsedDate.getMonth()]
+              }`
+        }`;
+
+        return (
+          <div
+            className="flex h-16 items-center justify-between border-b-2 border-[#111] px-5"
+            key={key}
+          >
+            <div className="flex items-center">
+              <div className="text-[#444]">
+                {from.slice(0, 5) + "..." + from.slice(-5)}
+              </div>
+              <div className="pl-10">{subject}</div>
+              <div className="px-2 text-[#555]">-</div>
+              <div className="text-[#555]">{preview}</div>
+            </div>
+
+            <div className="text-sm text-[#555]">{date}</div>
+          </div>
+        );
+      })}
 
       <div className="fixed bottom-5 right-5">
         <Link href="/mail/create">
