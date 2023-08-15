@@ -2,5 +2,7 @@
 import { cookies } from "next/headers";
 
 export const setCookie = (publicKey: string) => {
-  return cookies().set("publicKey", publicKey);
+  return cookies().set("publicKey", publicKey, {
+    priority: "high",
+  });
 };
