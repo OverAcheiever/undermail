@@ -31,6 +31,4 @@ export const create = async ({
     },
     { headers: { Authorization: `Bearer ${env.UNDERDOG_KEY}` } }
   );
-
-  redirect("/mail/inbox");
 };

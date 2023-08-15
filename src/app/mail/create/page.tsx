@@ -1,17 +1,13 @@
 "use client";
 import React, { useState, ChangeEvent } from "react";
-import { create } from "./create";
-import { useWallet } from "@solana/wallet-adapter-react";
 import To from "./components/to";
 import Subject from "./components/subject";
 import Editor from "./components/editor";
 import Send from "./components/send";
 
-const Create = (): JSX.Element => {
-  const [to, setTo] = useState<string>(
-    "HHX2R9dW5DyPqjg9pDSEjj5zEy11zg5AGr356PM6Exaq"
-  );
-  const [subject, setSubject] = useState<string>("hi");
+const create = () => {
+  const [to, setTo] = useState<string>();
+  const [subject, setSubject] = useState<string>();
   const [body, setBody] = useState<string>();
 
   return (
@@ -29,4 +25,4 @@ const Create = (): JSX.Element => {
   );
 };
 
-export default Create;
+export default create;
