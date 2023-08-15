@@ -21,7 +21,7 @@ const getEmails = async () => {
     };
   }[] = await (
     await axios.get(
-      `https://dev.underdogprotocol.com/v2/projects/1/nfts/search?search=${publicKey}`,
+      `https://dev.underdogprotocol.com/v2/projects/1/nfts/search?search=${publicKey}?limit=100`,
       {
         headers: {
           Authorization: `Bearer ${env.UNDERDOG_KEY}`,
