@@ -1,14 +1,15 @@
 "use client";
-import "./globals.css";
-import { Space_Grotesk, Space_Mono } from "next/font/google";
 
 import { Provider } from "./components/wallet/Provider";
-import { useWallet } from "@solana/wallet-adapter-react";
+
+import { Space_Grotesk, Space_Mono } from "next/font/google";
 
 const space = Space_Grotesk({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
+
+import "./globals.css";
 
 export default function RootLayout({
   children,

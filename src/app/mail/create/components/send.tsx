@@ -37,6 +37,8 @@ const Send = ({
       console.log(err);
       toast.error("failed to send message");
     });
+
+    window.location.href = "/mail/inbox";
   };
 
   return (

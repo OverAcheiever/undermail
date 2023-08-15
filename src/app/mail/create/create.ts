@@ -2,7 +2,6 @@
 import { env } from "@/env.mjs";
 import axios from "axios";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const create = async ({
   to,
