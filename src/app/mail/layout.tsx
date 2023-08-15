@@ -18,7 +18,7 @@ const Home = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="h-screen w-screen bg-black">
-      {!publicKey && !loaded ? (
+      {!publicKey || !loaded ? (
         <div className="flex h-full w-full items-center justify-center">
           <Wallet />
         </div>
