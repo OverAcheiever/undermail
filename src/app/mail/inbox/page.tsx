@@ -9,9 +9,9 @@ import { redirect } from "next/navigation";
 import { JSONContent } from "@tiptap/react";
 
 const getEmails = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  const { value: publicKey } = cookies().get("publicKey")!;
 
-  const res: {
+  const emails: {
     ownerAddress: string;
     attributes: {
       subject: string;
@@ -20,16 +20,17 @@ const getEmails = async () => {
       createdAt: string;
     };
   }[] = await (
-    await axios.get("https://dev.underdogprotocol.com/v2/projects/1/nfts", {
-      headers: {
-        Authorization: `Bearer ${env.UNDERDOG_KEY}`,
-      },
-    })
+    await axios.get(
+      `https://dev.underdogprotocol.com/v2/projects/1/nfts/search?search=${publicKey}`,
+      {
+        headers: {
+          Authorization: `Bearer ${env.UNDERDOG_KEY}`,
+        },
+      }
+    )
   ).data.results;
 
-  const { value: publicKey } = cookies().get("publicKey")!;
-
-  const emails = res.filter((email) => email.ownerAddress === publicKey);
+  // const emails = res.filter((email) => email.ownerAddress === publicKey);
 
   return emails.map((email) => ({
     from: email.attributes.from,
@@ -41,6 +42,8 @@ const getEmails = async () => {
 
 const Inbox = async () => {
   const emails = await getEmails();
+
+  // console.log(emails.length);
 
   return (
     <div className="relative w-full">

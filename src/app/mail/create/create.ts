@@ -14,20 +14,24 @@ export const create = async ({
 }) => {
   const { value: from } = cookies().get("publicKey")!;
 
-  await axios.post(
-    "https://dev.underdogprotocol.com/v2/projects/1/nfts",
-    {
-      name: "mail",
-      image: "",
-      receiverAddress: to,
-      attributes: {
-        from,
-        subject: subject,
-        body: body,
-        createdAt: new Date().toISOString(),
-        hasOpened: "false",
+  await axios
+    .post(
+      "https://dev.underdogprotocol.com/v2/projects/1/nfts",
+      {
+        name: "mail",
+        image: "",
+        receiverAddress: to,
+        attributes: {
+          from,
+          subject: subject,
+          body: body,
+          createdAt: new Date().toISOString(),
+          hasOpened: "false",
+        },
       },
-    },
-    { headers: { Authorization: `Bearer ${env.UNDERDOG_KEY}` } }
-  );
+      { headers: { Authorization: `Bearer ${env.UNDERDOG_KEY}` } }
+    )
+    .then((res) => {
+      console.log(res);
+    });
 };

@@ -6,6 +6,4 @@ export const setCookie = (publicKey: string) => {
   cookies().set("publicKey", publicKey, {
     priority: "high",
   });
-
-  redirect("/");
 };
