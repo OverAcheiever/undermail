@@ -10,6 +10,7 @@ const space = Space_Grotesk({
 });
 
 import "./globals.css";
+import Sidebar from "./components/sidebar";
 
 export default function RootLayout({
   children,
@@ -20,11 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <Provider>
         <body
-          className={`h-screen w-screen bg-black text-white ${space.className}`}
+          className={`flex h-screen w-screen bg-black text-white ${space.className}`}
         >
-          {children}
+          <Sidebar />
+          <div>{children}</div>
         </body>
       </Provider>
     </html>
   );
 }
+
+export const runtime = "edge";

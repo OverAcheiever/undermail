@@ -7,18 +7,18 @@ import { setCookie } from "./set-cookie";
 
 const Home = ({ children }: { children: React.ReactNode }) => {
   const { publicKey } = useWallet();
-  const [loaded, setLoaded] = useState<boolean>(false);
+  // const [loaded, setLoaded] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (publicKey) {
-      setCookie(publicKey.toString());
-      setLoaded(true);
-    }
-  }, [publicKey]);
+  // useEffect(() => {
+  //   if (publicKey) {
+  //     setCookie(publicKey.toString());
+  //     setLoaded(true);
+  //   }
+  // }, [publicKey]);
 
   return (
-    <div className="h-screen w-screen bg-black">
-      {!publicKey || !loaded ? (
+    <div className="h-full w-[calc(100vw-4rem)] bg-black">
+      {!publicKey ? (
         <div className="flex h-full w-full items-center justify-center">
           <Wallet />
         </div>
