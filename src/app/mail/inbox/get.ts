@@ -25,13 +25,20 @@ export const get = async (publicKey: string) => {
     )
   ).data.results;
 
-  return emails.map((email) => ({
-    id: email.id,
-    from: email.attributes.from,
-    subject: email.attributes.subject,
-    body: JSON.parse(email.attributes.body) as JSONContent,
-    createdAt: email.attributes.createdAt,
-    // convert "true" to true
-    hasOpened: email.attributes.hasOpened === "true" ? true : false,
-  }));
+  return emails
+    .map((email) => ({
+      id: email.id,
+      from: email.attributes.from,
+      subject: email.attributes.subject,
+      body: JSON.parse(email.attributes.body) as JSONContent,
+      createdAt: email.attributes.createdAt,
+      // convert "true" to true
+      hasOpened: email.attributes.hasOpened === "true" ? true : false,
+    }))
+    .sort((a, b) => {
+      const _a = new Date(a.createdAt);
+      const _b = new Date(b.createdAt);
+
+      return _b.getTime() - _a.getTime();
+    });
 };

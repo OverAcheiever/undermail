@@ -2,6 +2,7 @@ import { isValidPublicKey } from "@/utils/helpers/validate/publickey";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { Toaster, toast } from "react-hot-toast";
 import { create } from "../create";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const Send = ({
   to,
@@ -12,6 +13,8 @@ const Send = ({
   subject?: string;
   body?: string;
 }) => {
+  const { publicKey } = useWallet();
+
   const send = async () => {
     if (!to) {
       return toast.error("enter recipient address");
@@ -30,15 +33,18 @@ const Send = ({
     }
 
     await create({
+      from: publicKey!.toString(),
       to,
       subject,
       body,
-    }).catch((err) => {
-      console.log(err);
-      toast.error("failed to send message");
-    });
-
-    window.location.href = "/mail/inbox";
+    })
+      .then((res) => {
+        window.location.href = "/mail/inbox";
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("failed to send message");
+      });
   };
 
   return (

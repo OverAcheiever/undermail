@@ -4,16 +4,16 @@ import axios from "axios";
 import { cookies } from "next/headers";
 
 export const create = async ({
+  from,
   to,
   subject,
   body,
 }: {
+  from: string;
   to: string;
   subject: string;
   body: string;
 }) => {
-  const { value: from } = cookies().get("publicKey")!;
-
   await axios
     .post(
       "https://dev.underdogprotocol.com/v2/projects/1/nfts",

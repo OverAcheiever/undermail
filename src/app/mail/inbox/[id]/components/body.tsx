@@ -1,6 +1,4 @@
-"use client";
-
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
@@ -9,26 +7,23 @@ Image.configure({
   allowBase64: true,
 });
 
-const Editor = ({ setBody }: { setBody: (body: string) => void }) => {
+const Body = ({ body }: { body: JSONContent }) => {
   const editor = useEditor({
     extensions: [StarterKit, Link, Image],
-    // content: "",
     editorProps: {
       attributes: {
         class: "focus:outline-none",
       },
     },
-    onUpdate: ({ editor }) => {
-      console.log(editor.getJSON());
-      setBody(JSON.stringify(editor.getJSON()));
-    },
+    content: body,
+    editable: false,
   });
 
   return (
-    <div className="scrollbar relative h-[calc(100vh-11rem)] w-full overflow-y-auto p-5">
+    <div className="flex h-full w-full max-w-screen-xl items-center p-5 selection:">
       <EditorContent editor={editor} />
     </div>
   );
 };
 
-export default Editor;
+export default Body;

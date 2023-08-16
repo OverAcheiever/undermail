@@ -6,6 +6,7 @@ import { get } from "./get";
 import { read } from "./read";
 import Loading from "@/app/components/loading";
 import { date } from "@/utils/helpers/inbox";
+import Body from "./components/body";
 
 const Mail = ({ params: { id } }: { params: { id: string } }) => {
   const [mail, setMail] = useState<{
@@ -44,6 +45,8 @@ const Mail = ({ params: { id } }: { params: { id: string } }) => {
               {date(mail.createdAt)}
             </div>
           </div>
+
+          <Body body={mail.body} />
         </div>
       ) : (
         <Loading />

@@ -35,7 +35,7 @@ const Inbox = () => {
       {emails !== undefined ? (
         emails.map(({ id, from, subject, body, createdAt, hasOpened }, key) => {
           return (
-            <Link href={`/mail/inbox/${id}`} key={key}>
+            <Link href={`/mail/inbox/${id}`} key={id}>
               <div
                 className={`flex h-16 items-center justify-between border-b-2 px-5 transition-all duration-200 hover:bg-[rgb(20,20,20)]
                 ${
