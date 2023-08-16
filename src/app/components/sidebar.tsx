@@ -18,7 +18,10 @@ const Sidebar = () => {
   const path = usePathname();
 
   return (
-    <div className="flex h-full w-16 flex-col gap-y-1 border-r-2 border-[#111] p-2 pt-20">
+    <div className="flex h-full w-16 flex-col gap-y-2 border-r-2 border-[#111] p-2">
+      <div className="my-1 flex h-12 w-full  items-center justify-center text-4xl">
+        ✻
+      </div>
       {buttons.map(({ Icon, href }, index) => (
         <Link href={href} key={index}>
           <button
