@@ -3,6 +3,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { Toaster, toast } from "react-hot-toast";
 import { create } from "../create";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { useState } from "react";
 
 const Send = ({
   to,
@@ -13,6 +14,8 @@ const Send = ({
   subject?: string;
   body?: string;
 }) => {
+  const [loading, setLoading] = useState(false);
+
   const { publicKey } = useWallet();
 
   const send = async () => {
@@ -32,6 +35,8 @@ const Send = ({
       return toast.error("invalid recipient address");
     }
 
+    setLoading(true);
+
     await create({
       from: publicKey!.toString(),
       to,
@@ -43,6 +48,7 @@ const Send = ({
       })
       .catch((err) => {
         toast.error("failed to send message");
+        setLoading(false);
       });
   };
 
@@ -64,7 +70,11 @@ const Send = ({
         className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#222] bg-white font-bold text-black"
         onClick={send}
       >
-        <PaperAirplaneIcon className="h-5 w-5 " />
+        {loading ? (
+          <div className="animate-spin text-2xl">✻</div>
+        ) : (
+          <PaperAirplaneIcon className="h-5 w-5 " />
+        )}
       </button>
     </>
   );
