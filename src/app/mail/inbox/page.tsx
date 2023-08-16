@@ -28,16 +28,16 @@ const Inbox = () => {
     localStorage.setItem("mails", JSON.stringify(_mails));
   };
 
-  // useEffect(() => {
-  //   if (publicKey) {
-  //     const cache = localStorage.getItem("mails");
-  //     if (cache) {
-  //       setEmails(JSON.parse(cache));
-  //     }
+  useEffect(() => {
+    if (publicKey) {
+      const cache = localStorage.getItem("mails");
+      if (cache) {
+        setEmails(JSON.parse(cache));
+      }
 
-  //     getEmails();
-  //   }
-  // }, [publicKey]);
+      getEmails();
+    }
+  }, [publicKey]);
 
   return (
     <div className="relative h-screen w-full overflow-y-auto">
@@ -71,14 +71,6 @@ const Inbox = () => {
       ) : (
         <Loading />
       )}
-
-      {/* <div className="fixed bottom-5 right-5">
-        <Link href="/mail/create">
-          <button className="h-14 w-14 rounded-full bg-white p-3">
-            <PlusIcon className="h-full w-full text-black" />
-          </button>
-        </Link>
-      </div> */}
     </div>
   );
 };
