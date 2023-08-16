@@ -22,13 +22,13 @@ const Sidebar = () => {
       {buttons.map(({ Icon, href }, index) => (
         <Link href={href} key={index}>
           <button
-            className={`flex h-12 w-full items-center justify-center rounded-md border-[#222] p-2 transition-all ${
+            className={`flex h-12 w-full items-center justify-center rounded-md border-[#222] transition-all ${
               path === href
                 ? "border-2 bg-[#111]"
                 : "hover:border-2 hover:bg-[#111]"
             }`}
           >
-            <Icon className="h-full w-full text-[#333]" />
+            <Icon className="h-8 w-8 text-[#333]" />
           </button>
         </Link>
       ))}

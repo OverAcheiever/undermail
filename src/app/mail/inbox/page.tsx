@@ -30,6 +30,8 @@ const Inbox = () => {
           setEmails(JSON.parse(cache));
         }
 
+        console.log(publicKey);
+
         const _mails = await get(publicKey!.toString());
         setEmails(_mails);
         localStorage.setItem("mails", JSON.stringify(_mails));
