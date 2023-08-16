@@ -18,7 +18,7 @@ const Body = ({ body }: { body: JSONContent }) => {
     ],
     editorProps: {
       attributes: {
-        class: "focus:outline-none prose underline",
+        class: "focus:outline-none prose",
       },
     },
     content: body,
