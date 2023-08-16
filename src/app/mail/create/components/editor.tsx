@@ -5,17 +5,22 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 
-Image.configure({
-  allowBase64: true,
-});
-
 const Editor = ({ setBody }: { setBody: (body: string) => void }) => {
   const editor = useEditor({
-    extensions: [StarterKit, Link, Image],
-    // content: "",
+    extensions: [
+      StarterKit,
+      Link.configure({
+        HTMLAttributes: {
+          class: "underline",
+        },
+      }),
+      Image.configure({
+        allowBase64: true,
+      }),
+    ],
     editorProps: {
       attributes: {
-        class: "focus:outline-none",
+        class: "focus:outline-none prose",
       },
     },
     onUpdate: ({ editor }) => {

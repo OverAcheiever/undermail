@@ -4,21 +4,21 @@ import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 
 const Body = ({ body }: { body: JSONContent }) => {
-  Image.configure({
-    allowBase64: true,
-  });
-
-  Link.configure({
-    HTMLAttributes: {
-      class: "underline",
-    },
-  });
-
   const editor = useEditor({
-    extensions: [StarterKit, Link, Image],
+    extensions: [
+      StarterKit,
+      Link.configure({
+        HTMLAttributes: {
+          class: "underline",
+        },
+      }),
+      Image.configure({
+        allowBase64: true,
+      }),
+    ],
     editorProps: {
       attributes: {
-        class: "focus:outline-none",
+        class: "focus:outline-none prose underline",
       },
     },
     content: body,
