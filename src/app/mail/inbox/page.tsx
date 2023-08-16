@@ -38,7 +38,7 @@ const Inbox = () => {
   }, [publicKey]);
 
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative h-screen w-full overflow-y-auto">
       {emails !== undefined ? (
         emails.map(({ id, from, subject, body, createdAt, hasOpened }, key) => {
           return (

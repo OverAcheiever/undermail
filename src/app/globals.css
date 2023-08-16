@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For Webkit browsers (Chrome, Safari) */
+
+::-webkit-scrollbar {
+  width: 15px;
+  background-color: #111;
+  border: 1px solid #222;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid #222;
+  height: 100px;
+  display: block;
+}
+
+/* For Firefox */
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: black white;
+}
+
+/* Optional: For Internet Explorer */
+
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}

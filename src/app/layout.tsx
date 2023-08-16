@@ -1,6 +1,7 @@
 "use client";
 
 import { Provider } from "./components/wallet/Provider";
+import NextTopLoader from "nextjs-toploader";
 
 import { Space_Grotesk, Space_Mono } from "next/font/google";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <body
           className={`flex h-screen w-screen bg-black text-white ${space.className} antialiased`}
         >
+          <NextTopLoader color="#fff" showSpinner={false} />
           <Sidebar />
           <div>{children}</div>
         </body>
