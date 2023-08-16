@@ -3,11 +3,17 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 
-Image.configure({
-  allowBase64: true,
-});
-
 const Body = ({ body }: { body: JSONContent }) => {
+  Image.configure({
+    allowBase64: true,
+  });
+
+  Link.configure({
+    HTMLAttributes: {
+      class: "underline",
+    },
+  });
+
   const editor = useEditor({
     extensions: [StarterKit, Link, Image],
     editorProps: {

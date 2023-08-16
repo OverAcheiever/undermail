@@ -19,7 +19,6 @@ const Editor = ({ setBody }: { setBody: (body: string) => void }) => {
       },
     },
     onUpdate: ({ editor }) => {
-      console.log(editor.getJSON());
       setBody(JSON.stringify(editor.getJSON()));
     },
   });

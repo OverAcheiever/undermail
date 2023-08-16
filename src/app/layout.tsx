@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <Provider>
         <body
-          className={`flex h-screen w-screen bg-black text-white ${space.className}`}
+          className={`flex h-screen w-screen bg-black text-white ${space.className} antialiased`}
         >
           <Sidebar />
           <div>{children}</div>

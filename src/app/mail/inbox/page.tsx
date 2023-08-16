@@ -70,13 +70,13 @@ const Inbox = () => {
         <Loading />
       )}
 
-      <div className="fixed bottom-5 right-5">
+      {/* <div className="fixed bottom-5 right-5">
         <Link href="/mail/create">
           <button className="h-14 w-14 rounded-full bg-white p-3">
             <PlusIcon className="h-full w-full text-black" />
           </button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

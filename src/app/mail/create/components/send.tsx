@@ -42,7 +42,6 @@ const Send = ({
         window.location.href = "/mail/inbox";
       })
       .catch((err) => {
-        console.log(err);
         toast.error("failed to send message");
       });
   };

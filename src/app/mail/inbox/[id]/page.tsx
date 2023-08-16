@@ -27,8 +27,6 @@ const Mail = ({ params: { id } }: { params: { id: string } }) => {
     }
   }, [publicKey]);
 
-  console.log(mail);
-
   return (
     <>
       {mail ? (
