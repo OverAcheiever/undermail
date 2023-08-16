@@ -22,20 +22,20 @@ const Inbox = () => {
 
   const { publicKey } = useWallet();
 
+  const getEmails = async () => {
+    const _mails = await get(publicKey!.toString());
+    setEmails(_mails);
+    localStorage.setItem("mails", JSON.stringify(_mails));
+  };
+
   useEffect(() => {
     if (publicKey) {
-      (async () => {
-        const cache = localStorage.getItem("mails");
-        if (cache) {
-          setEmails(JSON.parse(cache));
-        }
+      const cache = localStorage.getItem("mails");
+      if (cache) {
+        setEmails(JSON.parse(cache));
+      }
 
-        console.log(publicKey);
-
-        const _mails = await get(publicKey!.toString());
-        setEmails(_mails);
-        localStorage.setItem("mails", JSON.stringify(_mails));
-      })();
+      getEmails();
     }
   }, [publicKey]);
 
