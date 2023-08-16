@@ -32,17 +32,15 @@ const Mail = ({ params: { id } }: { params: { id: string } }) => {
   return (
     <>
       {mail ? (
-        <div>
+        <div className="h-full w-full">
           <div className="flex h-16 w-full items-center justify-between border-b-2 border-[#111] px-5">
             <div className="flex items-center gap-x-3">
-              <div className="text-lg font-bold">10% off Underdog Protocol</div>
+              <div className="text-lg font-bold">{mail.subject}</div>
 
-              {/* <div className="text-[#444]">
-                {mail.from.slice(0, 5) + "..." + mail.from.slice(-5)}
-              </div> */}
+              <div className="text-[#444]"></div>
             </div>
-            <div className="text-sm font-bold text-[#555]">
-              {date(mail.createdAt)}
+            <div className="flex gap-x-3 text-sm font-bold text-[#555]">
+              <div>{mail.from}</div> ✻ <div>{date(mail.createdAt)}</div>
             </div>
           </div>
 

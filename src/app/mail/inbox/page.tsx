@@ -25,7 +25,14 @@ const Inbox = () => {
   useEffect(() => {
     if (publicKey) {
       (async () => {
-        setEmails(await get(publicKey!.toString()));
+        const cache = localStorage.getItem("mails");
+        if (cache) {
+          setEmails(JSON.parse(cache));
+        }
+
+        const _mails = await get(publicKey!.toString());
+        setEmails(_mails);
+        localStorage.setItem("mails", JSON.stringify(_mails));
       })();
     }
   }, [publicKey]);

@@ -20,8 +20,10 @@ const Body = ({ body }: { body: JSONContent }) => {
   });
 
   return (
-    <div className="flex h-full w-full max-w-screen-xl items-center p-5 selection:">
-      <EditorContent editor={editor} />
+    <div className="h-[calc(100vh-4rem)] w-full overflow-y-auto">
+      <div className="flex p-5">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 };
