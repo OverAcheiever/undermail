@@ -41,7 +41,7 @@ const Inbox = () => {
 
   return (
     <div className="relative h-screen w-full overflow-y-auto">
-      {emails !== undefined ? (
+      {emails &&
         emails.map(({ id, from, subject, body, createdAt, hasOpened }, key) => {
           return (
             <Link href={`/mail/inbox/${id}`} key={id}>
@@ -67,10 +67,7 @@ const Inbox = () => {
               </div>
             </Link>
           );
-        })
-      ) : (
-        <Loading />
-      )}
+        })}
     </div>
   );
 };
