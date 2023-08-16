@@ -13,7 +13,7 @@ const Body = ({ body }: { body: JSONContent }) => {
         },
       }),
       Image.configure({
-        allowBase64: true,
+        // allowBase64: true,
       }),
     ],
     editorProps: {
