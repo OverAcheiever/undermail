@@ -28,16 +28,16 @@ const Inbox = () => {
     localStorage.setItem("mails", JSON.stringify(_mails));
   };
 
-  useEffect(() => {
-    if (publicKey) {
-      const cache = localStorage.getItem("mails");
-      if (cache) {
-        setEmails(JSON.parse(cache));
-      }
+  // useEffect(() => {
+  //   if (publicKey) {
+  //     const cache = localStorage.getItem("mails");
+  //     if (cache) {
+  //       setEmails(JSON.parse(cache));
+  //     }
 
-      getEmails();
-    }
-  }, [publicKey]);
+  //     getEmails();
+  //   }
+  // }, [publicKey]);
 
   return (
     <div className="relative h-screen w-full overflow-y-auto">
@@ -82,7 +82,5 @@ const Inbox = () => {
     </div>
   );
 };
-
-export const revalidate = 5;
 
 export default Inbox;
